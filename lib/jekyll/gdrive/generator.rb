@@ -17,11 +17,17 @@ module Jekyll
         (0..sheet.num_rows).each do |row|
           data[row] = []
           (0..sheet.num_cols).each do |col|
-            data[row][col] = sheet[row, col]
+            data[row][col] = sheet[row+1, col+1]
           end
         end
 
-        site.data['gdrive_data'] = data
+        # remove empty rows
+        while data.last.all? {|c| c == "" || c.nil? }
+          data.pop
+        end
+
+        puts "Site data for google sheet: #{data}"
+        site.data['google_sheet'] = data
       end
     end
   end

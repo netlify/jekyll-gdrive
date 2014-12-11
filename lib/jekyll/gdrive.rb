@@ -1,7 +1,9 @@
-require "jekyll/gdrive/version"
-require "jekyll/commands/gdrive"
+require "google/api_client"
+require "google_drive"
 
-Puts "Main plugin required"
+require "jekyll/gdrive/version"
+require "jekyll/gdrive/generator"
+require "jekyll/commands/gdrive"
 
 module Jekyll
   module Gdrive
