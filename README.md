@@ -1,6 +1,6 @@
 # Jekyll Gdrive Plugin
 
-Access data from a Google Drvie Spreadsheet in your Jekyll sites
+Access data from a Google Drive Spreadsheet in your Jekyll sites
 
 ## Installation
 
@@ -24,9 +24,9 @@ Before you can access any data from GDrive you need to get an access token. Afte
 
 And follow the instructions to create an application in Google's developer console and generate an access token.
 
-Once you have to token, you need to set it up as an environment variable before running `jekyll build`.
+Once you have the token, you need to set it up as an environment variable before running `jekyll build`.
 
-    $ export GDRIVE_TOKEN=<your ned gdrive token>
+    $ export GDRIVE_TOKEN=<your gdrive token>
 
 You'll also need to configure the plugin to use the right spreadsheet.
 
@@ -34,7 +34,7 @@ Add this to your `_config.yml`:
 
 ```yaml
 gdrive:
-  sheet: "title of my spreadsheey"
+  sheet: "title of my spreadsheet"
 ```
 
 ## Accessing your Google Sheet data
