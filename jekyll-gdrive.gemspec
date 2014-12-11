@@ -7,10 +7,10 @@ Gem::Specification.new do |spec|
   spec.name          = "jekyll-gdrive"
   spec.version       = Jekyll::Gdrive::VERSION
   spec.authors       = ["Mathias Biilmann Christensen"]
-  spec.email         = ["info@mathias-biilmann.net"]
+  spec.email         = ["mathias@netlify.com"]
   spec.summary       = %q{Google Sheets access from your Jekyll sites}
   spec.description   = %q{Access Data from a Google Sheet through the GDrive API in your Jekyll sites}
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/netlify/jekyll-gdrive"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
