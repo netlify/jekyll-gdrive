@@ -3,12 +3,22 @@ module Jekyll
     class Generator < Jekyll::Generator
       def generate(site)
         sheet_name = site.config['gdrive'] && site.config['gdrive']['sheet']
-        access_token = ENV['GDRIVE_TOKEN']
+        credentials = ENV['GDRIVE'] && ENV['GDRIVE'].split(":")
 
         raise "No sheet specified for the GDrive Data Plugin\nSet 'gdrive.sheet' in your '_config.yml'" unless sheet_name
-        raise "No access token specified for the GDrive Data Plugin\nSet it in a GRDIVE_TOKEN environment variable\nEg.: export GDRIVE_TOKEN=my-long-token\nRun 'jekyll gdrive' to get an access token" unless access_token
-        
-        session = GoogleDrive.login_with_oauth(access_token)
+        raise "No credentials specified for the GDrive Data Plugin\nSet it in a GRDIVE environment variable\nEg.: export GDRIVE_TOKEN=<client_id>:<client_secret>:<refresh_token>\nRun 'jekyll gdrive' to get an export statement you can cut and past" unless credentials
+
+        client = Google::APIClient.new(
+          :application_name => "Jekyll GDrive Plugin",
+          :application_version => Jekyll::Gdrive::VERSION
+        )
+        auth = client.authorization
+        auth.client_id     = credentials[0]
+        auth.client_secret = credentials[1]
+        auth.refresh_token = credentials[2]
+        auth.fetch_access_token!()
+
+        session = GoogleDrive.login_with_oauth(auth.access_token)
 
         sheet = session.file_by_title(sheet_name).worksheets.first
 

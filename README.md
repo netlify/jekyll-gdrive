@@ -18,15 +18,15 @@ And then execute:
 
 ## Usage
 
-Before you can access any data from GDrive you need to get an access token. After installing the plugin, run:
+Before you can access any data from GDrive you need to configure your GDrive API credentials. After installing the plugin, run:
 
     $ bundle exec jekyll gdrive
 
-And follow the instructions to create an application in Google's developer console and generate an access token.
+And follow the instructions to create an application in Google's developer console and generate a refresh token.
 
-Once you have the token, you need to set it up as an environment variable before running `jekyll build`.
+Once you have the token, you need to set it up as an environment variable before running `jekyll build`. The GDrive plugin will give you an export statement you can use to setup your environment:
 
-    $ export GDRIVE_TOKEN=<your gdrive token>
+    $ export GDRIVE=<client_id>:<client_secret>:<your gdrive token>
 
 You'll also need to configure the plugin to use the right spreadsheet.
 

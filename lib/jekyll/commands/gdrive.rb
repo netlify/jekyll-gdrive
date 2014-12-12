@@ -43,19 +43,12 @@ module Jekyll
           end
           auth.code = ask "Enter he authorization code shown in the page: "
           auth.fetch_access_token!
-          access_token = auth.access_token
 
+          puts "OAuth credentials generated"
+          puts "To access Google Drive data from your Jekyll site"
+          puts "Set a GDRIVE environment variable"
           puts 
-          puts "You now have a Google Drive Access token:"
-          puts
-          puts access_token
-          puts
-          puts "Remember, this token gives access to all the files in your drive"
-          puts "So keep it safe"
-          puts "To use with the Jekyll GDrive plugin:"
-          puts "Set a GDRIVE_TOKEN environment variable"
-          puts 
-          puts "export GDRIVE_TOKEN=#{access_token}"
+          puts "export GDRIVE=#{auth.client_id}:#{auth.client_secret}:#{auth.refresh_token}"
         end
       end
     end
