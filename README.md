@@ -62,6 +62,22 @@ Example:
   </table>
 ```
 
+## Caching
+
+Google's Drive API is not incredibly fast. When working in `jekyll serve --watch` mode you'll quickly get tired of waiting for the spreadsheet data to load on every refresh.
+
+To work around this you can specify a cache period for the gdrive plugin in the Jekyll configuration:
+
+```yaml
+gdrive:
+   sheet: "My sheet"
+   cache_period: 5 minutes
+```
+
+This will store the sheet in a local `_gdrive_cache` file and only reload the sheet data once every 5 minutes.
+
+You can specify the time in `seconds`, `minutes` or `hours`.
+
 ## Contributing
 
 1. Fork it ( https://github.com/[my-github-username]/jekyll-gdrive/fork )
