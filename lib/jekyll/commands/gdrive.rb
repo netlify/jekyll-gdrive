@@ -20,7 +20,9 @@ module Jekyll
           puts "Create a new project with Google's Developer Platform:"
           puts "https://console.developers.google.com/project"
           puts
-          puts "Go to the project, select APIs & Auth > Credentials from left menu"
+          puts "Go to the project, select APIs & Auth > APIs from left menu"
+          puts "Pick the 'Drive API' and make sure it's enabled."
+          puts "Then select APIs & Auth > Credentials from left menu"
           puts "Create new OAuth Client ID"
           puts "Pick 'Installed Application' and fill out information"
 
@@ -28,30 +30,29 @@ module Jekyll
           auth = client.authorization
           auth.client_id = ask "Enter your Google Drive API Client ID: "
           auth.client_secret = ask "Enter your Google Drive API Client Secret: "
-          auth.scope = 
+          auth.scope =
               "https://www.googleapis.com/auth/drive " +
               "https://docs.google.com/feeds/ " +
               "https://docs.googleusercontent.com/ " +
               "https://spreadsheets.google.com/feeds/"
-          
+
           auth.redirect_uri = "urn:ietf:wg:oauth:2.0:oob"
 
           unless system("open '#{auth.authorization_uri}'")
             puts "Open this page in your browser:"
             puts auth.authorization_uri
-            puts 
+            puts
           end
-          auth.code = ask "Enter he authorization code shown in the page: "
+          auth.code = ask "Enter the authorization code shown in the page: "
           auth.fetch_access_token!
 
           puts "OAuth credentials generated"
           puts "To access Google Drive data from your Jekyll site"
           puts "Set a GDRIVE environment variable"
-          puts 
+          puts
           puts "export GDRIVE=#{auth.client_id}:#{auth.client_secret}:#{auth.refresh_token}"
         end
       end
     end
   end
 end
-
