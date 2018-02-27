@@ -3,15 +3,20 @@ module Jekyll
     class Generator < Jekyll::Generator
       def generate(site)
         sheet_name   = site.config['gdrive'] && site.config['gdrive']['sheet']
+        tab_number   = site.config['gdrive'] && site.config['gdrive']['tab']
         cache_period = site.config['gdrive'] && site.config['gdrive']['cache_period']
         credentials  = ENV['GDRIVE'] && ENV['GDRIVE'].split(":")
 
         raise "No sheet specified for the GDrive Data Plugin\nSet 'gdrive.sheet' in your '_config.yml'" unless sheet_name
         raise "No credentials specified for the GDrive Data Plugin\nSet it in a GRDIVE environment variable\nEg.: export GDRIVE_TOKEN=<client_id>:<client_secret>:<refresh_token>\nRun 'jekyll gdrive' to get an export statement you can cut and past" unless credentials
 
+        unless tab_number
+          tab_number = 0
+        end
+
         data = load_from_cache(cache_period)
         unless data
-          sheet = load_from_sheet(sheet_name, credentials)
+          sheet = load_from_sheet(sheet_name, tab_number, credentials)
 
           data = []
 
@@ -33,7 +38,7 @@ module Jekyll
         site.data['google_sheet'] = data
       end
 
-      def load_from_sheet(sheet_name, credentials)
+      def load_from_sheet(sheet_name, tab_number, credentials)
         client = Google::APIClient.new(
           :application_name => "Jekyll GDrive Plugin",
           :application_version => Jekyll::Gdrive::VERSION
@@ -45,7 +50,7 @@ module Jekyll
         auth.fetch_access_token!()
 
         session = GoogleDrive.login_with_oauth(auth.access_token)
-        session.file_by_title(sheet_name).worksheets.first
+        session.file_by_title(sheet_name).worksheets[tab_number]
       end
 
       def store_in_cache(data)
