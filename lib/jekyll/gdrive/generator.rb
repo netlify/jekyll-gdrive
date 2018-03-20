@@ -60,6 +60,11 @@ module Jekyll
             "data" => data
           })
         end
+        File.open("assets/bar-data3", "w") do |file|
+          file.write YAML.dump({
+            "data" => data
+          })
+        end
       end
 
       def load_from_cache(cache_period)
