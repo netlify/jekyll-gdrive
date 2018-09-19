@@ -36,7 +36,7 @@ module Jekyll
         end
 
         site.data['google_sheet'] = data
-        data2 = data[_][1]
+        data2 = data.map { |a| a[0] }
         site.data['test_var'] = data2
       end
 
