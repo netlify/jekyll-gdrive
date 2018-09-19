@@ -36,7 +36,8 @@ module Jekyll
         end
 
         site.data['google_sheet'] = data
-        site.data['test_var'] = data[][1]
+        data2 = data.select{|_, y| y ==1 }
+        site.data['test_var'] = data2
       end
 
       def load_from_sheet(sheet_name, tab_number, credentials)
