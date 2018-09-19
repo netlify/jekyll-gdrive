@@ -36,8 +36,12 @@ module Jekyll
         end
 
         site.data['google_sheet'] = data
-        data2 = data.map { |a| a[0] }
-        site.data['test_var'] = data2
+        years = data.map { |a| a[2] }
+        site.data['reading_years'] = years
+        fiction = data.map { |a| a[4] }
+        site.data['fiction'] = fiction
+        nonfiction = data.map { |a| a[5] }
+        site.data['nonfiction'] = nonfiction
       end
 
       def load_from_sheet(sheet_name, tab_number, credentials)
