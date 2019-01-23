@@ -50,11 +50,9 @@ module Jekyll
           client_secret: credentials[1],
           refresh_token: credentials[2]
           )
-
         credentials.fetch_access_token!
 
         session = GoogleDrive::Session.from_credentials(credentials)
-        
         session.file_by_title(sheet_name).worksheets[tab_number]
       end
 
