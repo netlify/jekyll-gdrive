@@ -45,10 +45,7 @@ module Jekyll
       end
 
       def load_from_sheet(sheet_name, tab_number, credentials)
-        client = Google::Apis::DriveV2::DriveService.new(
-          :application_name => "Jekyll GDrive Plugin",
-          :application_version => Jekyll::Gdrive::VERSION
-        )
+        client = Google::Apis::DriveV2::DriveService.new
         auth = client.authorization
         auth.client_id     = credentials[0]
         auth.client_secret = credentials[1]
