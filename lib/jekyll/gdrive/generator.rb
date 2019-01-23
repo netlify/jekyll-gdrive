@@ -45,14 +45,16 @@ module Jekyll
       end
 
       def load_from_sheet(sheet_name, tab_number, credentials)        
-        client = Google::Apis::DriveV2::DriveService.new
-        auth = client.authorization
-        auth.client_id     = credentials[0]
-        auth.client_secret = credentials[1]
-        auth.refresh_token = credentials[2]
-        auth.fetch_access_token!()
+        credentials = Google::Auth::UserRefreshCredentials.new(
+          client_id: credentials[0],
+          client_secret: credentials[1],
+          refresh_token: credentials[2]
+          )
 
-        session = GoogleDrive.login_with_oauth(auth.access_token)
+        credentials.fetch_access_token!
+
+        session = GooleDirve::Session.from_credentials(credentials)
+        
         session.file_by_title(sheet_name).worksheets[tab_number]
       end
 
