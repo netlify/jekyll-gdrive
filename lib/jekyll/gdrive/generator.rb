@@ -44,9 +44,8 @@ module Jekyll
         site.data['nonfiction'] = nonfiction
       end
 
-      def load_from_sheet(sheet_name, tab_number, credentials)
-        Drive = Google::Apis::DriveV2
-        client = Drive::DriveService.new        
+      def load_from_sheet(sheet_name, tab_number, credentials)        
+        client = Google::Apis::DriveV2::DriveService.new
         auth = client.authorization
         auth.client_id     = credentials[0]
         auth.client_secret = credentials[1]
