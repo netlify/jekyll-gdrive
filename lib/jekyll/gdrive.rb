@@ -1,4 +1,4 @@
-require "google/api_client"
+require "google/apis/drive_v2"
 require "google_drive"
 
 require "jekyll/gdrive/version"
