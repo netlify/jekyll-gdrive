@@ -53,7 +53,7 @@ module Jekyll
 
         credentials.fetch_access_token!
 
-        session = GooleDirve::Session.from_credentials(credentials)
+        session = GoogleDrive::Session.from_credentials(credentials)
         
         session.file_by_title(sheet_name).worksheets[tab_number]
       end
