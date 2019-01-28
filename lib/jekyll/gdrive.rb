@@ -1,5 +1,5 @@
-require "google/api_client"
 require "google_drive"
+require "googleauth"
 
 require "jekyll/gdrive/version"
 require "jekyll/gdrive/generator"

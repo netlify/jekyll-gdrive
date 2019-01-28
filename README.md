@@ -37,6 +37,15 @@ gdrive:
   sheet: "title of my spreadsheet"
 ```
 
+## Choosing which tab in the Sheet to use
+You can add a choice in your configuration for which tab in the Sheet will be used. Bear in mind that these tab numbers are zero-indexed (i.e. `0` corresponds to the first tab in the sheet.) If none is specified, the first tab will be used.
+
+```yaml
+gdrive:
+  sheet: "title of my spreadsheet"
+  tab: 2
+```
+
 ## Accessing your Google Sheet data
 
 In any Liquid template you can now use: `site.data.google_sheet` to access your sheet data.
